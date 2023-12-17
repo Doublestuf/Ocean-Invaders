@@ -23,14 +23,19 @@ class Bullet:
         if not self.shoot_timer and [event for event in pg.event.get(pg.KEYUP) if event.key == pg.K_SPACE]:
             self.shoot(rect)
             
+        for bullet in self.bullets:
+            if not bullet.colliderect(window.get_rect()):
+                self.bullets.remove(bullet)
+                
+        if not self.bullets:
+            self.bullet_active = False
+            
         if self.bullet_active:
             self.shoot_timer -= 1
             for bullet in self.bullets:
                 bullet.move_ip(0, -4)
-                
-            if window.get_rect().collidelist(self.bullets) == -1:
-                self.bullet_active = False
-                self.bullets = []
+        else:
+            self.shoot_timer = 0
                 
         if self.shoot_timer < 1:
             self.shoot_timer = 0
@@ -40,4 +45,4 @@ class Bullet:
     def draw(self):
         if self.bullet_active:
             for bullet in self.bullets:
-                pg.draw.rect(window, RED, bullet)
+                pg.draw.rect(window, GREEN, bullet)
