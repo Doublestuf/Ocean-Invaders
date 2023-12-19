@@ -2,29 +2,39 @@ from engine import *
 
 from src.Player import Player
 from src.Enemy import Enemy
+from src.TitleScreen import TitleScreen
 
 class Game:
     def __init__(self) -> None:
         self.running = True
+        self.in_menu = True
         
         self.player = Player()
         self.enemies = []
         
         self.grass = pg.Rect(0, 0, window.get_width(), 200)
         self.grass.bottomleft = window.get_rect().bottomleft
+        
+        self.title_screen = TitleScreen()
 
     def run(self):
         for x in range(100, window.get_width()-100, 200):
             self.enemies.append(Enemy(x+15, 100))
         
         while self.running:
-            self.update()
-            self.draw()
+            if pg.event.get(pg.QUIT):
+                self.running = False
+            
+            if self.in_menu:
+                self.in_menu = not self.title_screen.update()
+                self.title_screen.draw()
+            else:
+                self.update()
+                self.draw()
+
+            pg.display.update()
     
     def update(self) -> None:
-        if pg.event.get(pg.QUIT):
-            self.running = False
-            
         self.player.update(pg.key.get_pressed())
         
         player_bullets = self.player.bullet.bullets
@@ -53,5 +63,3 @@ class Game:
         
         for enemy in self.enemies:
             enemy.draw()
-        
-        pg.display.update()

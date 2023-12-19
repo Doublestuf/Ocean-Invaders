@@ -8,6 +8,11 @@ class Enemy:
         self.rect.left = x
         self.rect.centery = y
         
+        self.original_position_left = self.rect.left
+        self.original_position_right = self.rect.right
+        self.move_distance = 100
+        self.times_moved = 0
+                
         self.bullet = EnemyBullet()
         self.shoot_timer = 150
     
@@ -19,7 +24,22 @@ class Enemy:
             self.shoot_timer = 150
         
         self.bullet.update()
-    
+        
+        left_target = self.original_position_left - self.move_distance
+        right_target = self.original_position_right + self.move_distance
+        
+        if self.rect.right == right_target or self.rect.left == left_target:
+            self.times_moved += 1
+        
+        vector = pg.math.Vector2(self.rect.topleft)
+        
+        if not self.times_moved % 2:
+            vector.move_towards_ip((right_target, self.rect.top), 1)
+        else:
+            vector.move_towards_ip((left_target, self.rect.top), 1)
+            
+        self.rect.topleft = vector
+        
     def draw(self):
         pg.draw.rect(window, WHITE, self.rect)
         

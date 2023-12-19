@@ -20,7 +20,7 @@ class Bullet:
         self.shoot_timer = 60
     
     def update(self, rect:pg.Rect):
-        if not self.shoot_timer and [event for event in pg.event.get(pg.KEYUP) if event.key == pg.K_SPACE]:
+        if not self.shoot_timer and pg.key.get_pressed()[pg.K_SPACE]:
             self.shoot(rect)
             
         for bullet in self.bullets:
@@ -39,8 +39,6 @@ class Bullet:
                 
         if self.shoot_timer < 1:
             self.shoot_timer = 0
-                
-        pg.event.clear(pg.KEYUP)
     
     def draw(self):
         if self.bullet_active:
