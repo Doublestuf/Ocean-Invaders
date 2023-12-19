@@ -4,6 +4,9 @@ import pygame as pg
 pg.font.init()
 #initialize pygame fonts
 
+pg.mixer.init()
+#initialize pygame sfx and music
+
 window = pg.display.set_mode((1280, 720))
 clock = pg.time.Clock()
 #initialize game window

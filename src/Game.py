@@ -1,4 +1,5 @@
 from engine import *
+from audio import hit_sound
 
 from src.Player import Player
 from src.Enemy import Enemy
@@ -61,6 +62,7 @@ class Game:
             if enemy.rect.collidelist(player_bullets) != -1:
                 self.enemies.remove(enemy)
                 self.player_score += 10
+                hit_sound.play()
                 
             enemy_bullets = enemy.bullet.bullets
                 

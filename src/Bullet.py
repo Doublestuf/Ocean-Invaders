@@ -1,4 +1,5 @@
 from engine import *
+from audio import shoot_sound
 
 class Bullet:
     def __init__(self) -> None:
@@ -22,6 +23,7 @@ class Bullet:
     def update(self, rect:pg.Rect):
         if not self.shoot_timer and pg.key.get_pressed()[pg.K_SPACE]:
             self.shoot(rect)
+            shoot_sound.play()
             
         for bullet in self.bullets:
             if not bullet.colliderect(window.get_rect()):

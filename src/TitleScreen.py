@@ -1,4 +1,5 @@
 from engine import *
+from audio import select_sound
 
 class TitleScreen:
     def __init__(self) -> None:
@@ -27,6 +28,8 @@ class TitleScreen:
     def update(self):
         return pg.key.get_pressed()[pg.K_RETURN]
         #return if player has started the game
+        
+        select_sound.play()
     
     def draw(self):
         window.fill(LIGHTBLUE)
