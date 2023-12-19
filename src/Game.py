@@ -23,9 +23,12 @@ class Game:
         self.title_screen = TitleScreen()
         self.score_counter = ScoreCounter()
     
-    def spawn_enemies(self):
-        for x in range(100, window.get_width()-100, 200):
-            self.enemies.append(Enemy(x+15, 100))
+    def spawn_enemies(self, row:int = 1):
+        for x in range(100 if row == 1 else 200, window.get_width()-(100 if row == 1 else 200), 200):
+            enemy = Enemy(x+15, 100 if row == 1 else 215)
+            enemy.shoot_timer = 300 if row == 1 else 400
+            
+            self.enemies.append(enemy)
 
     def run(self):
         while self.running:
@@ -50,6 +53,7 @@ class Game:
             if not self.spawn_timer:
                 self.spawn_timer = 30
                 self.spawn_enemies()
+                self.spawn_enemies(2)
         
         player_bullets = self.player.bullet.bullets
         

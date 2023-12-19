@@ -14,14 +14,14 @@ class Enemy:
         self.times_moved = 0
                 
         self.bullet = EnemyBullet()
-        self.shoot_timer = 150
+        self.shoot_timer = 300
     
     def update(self):
         if self.shoot_timer:
             self.shoot_timer -= 1
         else:
             self.bullet.shoot(self.rect)
-            self.shoot_timer = 150
+            self.shoot_timer = 300
         
         self.bullet.update()
         
