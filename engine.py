@@ -14,6 +14,9 @@ clock = pg.time.Clock()
 pg.display.set_caption("Ocean Invaders")
 #set game window name
 
+pg.mouse.set_visible(False)
+#set mouse cursor as invisible
+
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (128, 128, 128)
@@ -26,4 +29,6 @@ DARKGREEN = (50, 200, 50)
 #color constant variables
 
 default_font_name = "assets/pixel_font.ttf"
+
+dolphin_sprite = pg.image.load("assets/dolphin.png")
 #variables

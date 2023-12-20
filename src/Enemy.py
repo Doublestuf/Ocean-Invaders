@@ -8,6 +8,8 @@ class Enemy:
         self.rect.left = x
         self.rect.centery = y
         
+        self.sprite = dolphin_sprite
+        
         self.original_position_left = self.rect.left
         self.original_position_right = self.rect.right
         self.move_distance = 100
@@ -41,6 +43,7 @@ class Enemy:
         self.rect.topleft = vector
         
     def draw(self):
-        pg.draw.rect(window, WHITE, self.rect)
+        window.blit(self.sprite, self.rect)
+        # pg.draw.rect(window, WHITE, self.rect)
         
         self.bullet.draw()
