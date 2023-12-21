@@ -26,9 +26,11 @@ GREEN = (0, 255, 0)
 
 LIGHTBLUE = (50, 100, 255)
 DARKGREEN = (50, 200, 50)
+DARKRED = (150, 0, 0)
 #color constant variables
 
 default_font_name = "assets/pixel_font.ttf"
 
 dolphin_sprite = pg.image.load("assets/dolphin.png")
+heart_sprite = pg.image.load("assets/heart.png")
 #variables

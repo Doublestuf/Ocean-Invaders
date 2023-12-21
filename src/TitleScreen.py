@@ -26,10 +26,11 @@ class TitleScreen:
         #set position of the starting text
         
     def update(self):
-        return pg.key.get_pressed()[pg.K_RETURN]
-        #return if player has started the game
-        
-        select_sound.play()
+        return_pressed = pg.key.get_pressed()[pg.K_RETURN]
+
+        if return_pressed:
+            select_sound.play()
+        return return_pressed
     
     def draw(self):
         window.fill(LIGHTBLUE)

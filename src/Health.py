@@ -2,10 +2,13 @@ from engine import *
 
 class Health:
     def __init__(self) -> None:
-        pass
-    
+        self.health_amount = 3
+        self.sprite = heart_sprite
+
     def update(self):
-        pass
-    
+        if self.health_amount < 1:
+            quit()
+        
     def draw(self):
-        pass
+        for x in range(self.health_amount):
+            window.blit(self.sprite, (x*55, 65))

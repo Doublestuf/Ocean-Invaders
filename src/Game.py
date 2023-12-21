@@ -1,16 +1,20 @@
 from engine import *
-from audio import hit_sound
+from audio import hit_sound, hurt_sound
 
 from src.Player import Player
 from src.Enemy import Enemy
 
 from src.TitleScreen import TitleScreen
+from src.LoseScreen import LoseScreen
+
 from src.ScoreCounter import ScoreCounter
+from src.Health import Health
 
 class Game:
     def __init__(self) -> None:
         self.running = True
-        self.in_menu = True
+        self.started = True
+        self.lost = False
         
         self.player = Player()
         self.player_score = 0
@@ -22,7 +26,10 @@ class Game:
         self.grass.bottomleft = window.get_rect().bottomleft
         
         self.title_screen = TitleScreen()
+        self.lose_screen = LoseScreen()
+        
         self.score_counter = ScoreCounter()
+        self.health = Health()
     
     def spawn_enemies(self, row:int = 1):
         for x in range(100 if row == 1 else 200, window.get_width()-(100 if row == 1 else 200), 200):
@@ -36,9 +43,12 @@ class Game:
             if pg.event.get(pg.QUIT):
                 self.running = False
             
-            if self.in_menu:
-                self.in_menu = not self.title_screen.update()
+            if self.started:
+                self.started = not self.title_screen.update()
                 self.title_screen.draw()
+            elif self.lost:
+                self.lost = not self.lose_screen.update()
+                self.lose_screen.draw()
             else:
                 self.update()
                 self.draw()
@@ -47,6 +57,7 @@ class Game:
     
     def update(self) -> None:
         self.score_counter.update(self.player_score)
+        self.health.update()
         self.player.update(pg.key.get_pressed())
         
         if not self.enemies:
@@ -70,6 +81,10 @@ class Game:
                 if bullet.collidelist(player_bullets) != -1:
                     enemy_bullets.remove(bullet)
                     player_bullets.remove(player_bullets[bullet.collidelist(player_bullets)])
+                if bullet.colliderect(self.player.rect):
+                    self.health.health_amount -= 1
+                    enemy_bullets.remove(bullet)
+                    hurt_sound.play()
             
             enemy.update()
             
@@ -84,4 +99,6 @@ class Game:
         
         for enemy in self.enemies:
             enemy.draw()
+            
+        self.health.draw()
         self.score_counter.draw()
