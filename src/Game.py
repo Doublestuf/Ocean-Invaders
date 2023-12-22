@@ -52,7 +52,7 @@ class Game:
                 self.title_screen.draw()
             elif self.lost:
                 self.lost = not self.lose_screen.update()
-                self.lose_screen.draw()
+                self.lose_screen.draw(int(open("data.txt", "r").read()))
                 if not self.lost:
                     self.start()
             else:
@@ -62,9 +62,16 @@ class Game:
             pg.display.update()
     
     def update(self) -> None:
+        self.player.update(pg.key.get_pressed())
         self.score_counter.update(self.player_score)
         self.lost = self.health.update()
-        self.player.update(pg.key.get_pressed())
+        
+        if self.lost:
+            read_file = open("data.txt", "r")
+            if self.player_score > int(read_file.read()):
+                write_file = open("data.txt", "w")
+                write_file.write(str(self.player_score))
+            read_file.close()
         
         if not self.enemies:
             self.spawn_timer -= 1
