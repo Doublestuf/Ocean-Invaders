@@ -14,6 +14,10 @@ class Game:
     def __init__(self) -> None:
         self.running = True
         self.started = True
+        
+        self.start()
+        
+    def start(self):
         self.lost = False
         
         self.player = Player()
@@ -49,6 +53,8 @@ class Game:
             elif self.lost:
                 self.lost = not self.lose_screen.update()
                 self.lose_screen.draw()
+                if not self.lost:
+                    self.start()
             else:
                 self.update()
                 self.draw()
@@ -57,7 +63,7 @@ class Game:
     
     def update(self) -> None:
         self.score_counter.update(self.player_score)
-        self.health.update()
+        self.lost = self.health.update()
         self.player.update(pg.key.get_pressed())
         
         if not self.enemies:

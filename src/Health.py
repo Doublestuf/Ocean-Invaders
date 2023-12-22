@@ -6,8 +6,7 @@ class Health:
         self.sprite = heart_sprite
 
     def update(self):
-        if self.health_amount < 1:
-            quit()
+        return self.health_amount < 1
         
     def draw(self):
         for x in range(self.health_amount):

@@ -17,7 +17,7 @@ class TitleScreen:
         start_font = pg.font.Font(default_font_name, 30)
         #create smaller font for start text
         
-        self.start_text = start_font.render("Press RETURN to Start", False, WHITE)
+        self.start_text = start_font.render("Press ENTER to Start", False, WHITE)
         #create text surface for starting text
         
         self.start_text_rect = self.start_text.get_rect()
