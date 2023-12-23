@@ -104,7 +104,7 @@ class Game:
         clock.tick(60)
     
     def draw(self) -> None:
-        window.fill(LIGHTBLUE)
+        window.fill(OCEANBLUE)
         
         pg.draw.rect(window, DARKGREEN, self.grass)
         
