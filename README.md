@@ -1,6 +1,18 @@
 # Ocean-Invaders
 like space invaders but ocean
 
+How To Run:
+
+Run either run.py or run.exe
+
+That's it
+
+Controls:
+
+A/Left Arrow -> Left
+D/Right Arrow -> Right
+Space -> Shoot
+
 the last few things i wanted to add to this were:
   sprites for the player, dolphins, grass, and water
   controls on the title screen
