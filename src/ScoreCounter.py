@@ -12,4 +12,4 @@ class ScoreCounter:
         self.score_surface = self.score_font.render(f"Score: {self.score_count}", False, WHITE)
     
     def draw(self):
-         window.blit(self.score_surface, (0, 0))
+         window.blit(self.score_surface, (20, 0))

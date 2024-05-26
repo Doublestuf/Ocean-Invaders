@@ -10,4 +10,4 @@ class Health:
         
     def draw(self):
         for x in range(self.health_amount):
-            window.blit(self.sprite, (x*55, 65))
+            window.blit(self.sprite, (20 + x*55, 65))
